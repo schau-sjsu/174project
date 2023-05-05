@@ -53,20 +53,40 @@ function Calendar() {
         };
       }, []);
 
+    // open modal when date is clicked
+    // const handleDateClick = (arg) => {
+    //     // open your modal here
+    //     console.log(arg.date);
+    //   }
+
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    
+    const handleDateClick = (clickInfo) => {
+        console.log(clickInfo.date);
+        setSelectedDate(clickInfo.date);
+        setShowModal(true);
+    };
+
     return (
         <div className='parent'>
-            <FullCalendar
-                plugins={[ dayGridPlugin, timeGridPlugin, listPlugin ]}
-                initialView={view}
-                headerToolbar={{
-                    start: "prev,next today",
-                    center: "title",
-                    end: "dayGridMonth,timeGridWeek,listMonth",
-                  }}
-                eventBackgroundColor='#2c3e50'
-                eventBorderColor='#2c3e50'
-                events={events}
-            />
+            <div className='calendar'>
+                <FullCalendar
+                    plugins={[ dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin ]}
+                    initialView={view}
+                    dateClick={handleDateClick}
+                    headerToolbar={{
+                        start: "prev,next today",
+                        center: "title",
+                        end: "dayGridMonth,timeGridWeek,listMonth",
+                    }}
+                    eventBackgroundColor='#2c3e50'
+                    eventBorderColor='#2c3e50'
+                    events={events}
+                />
+            </div>
+            
+            <CreateEventModal overlayClassName="modal-overlay" isOpen={showModal} onClose={() => setShowModal(false)} date={selectedDate} />
         </div>
     );
 }

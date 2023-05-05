@@ -1,5 +1,7 @@
 .parent {
     margin: 1rem;
+    position: relative;
+    z-index: 999;
 }
 
 .fc {
