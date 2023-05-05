@@ -1,0 +1,12 @@
+.parent {
+    margin: 1rem;
+}
+
+.fc {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+.fc-day-today {
+    color: #2c3e50 !important;
+}

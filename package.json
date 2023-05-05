@@ -1,7 +1,11 @@
 {
   "dependencies": {
     "@fullcalendar/daygrid": "^6.1.6",
+    "@fullcalendar/interaction": "^6.1.6",
+    "@fullcalendar/list": "^6.1.6",
     "@fullcalendar/react": "^6.1.6",
-    "js-cookie": "^3.0.5"
+    "@fullcalendar/timegrid": "^6.1.6",
+    "js-cookie": "^3.0.5",
+    "react-modal": "^3.16.1"
   }
 }
