@@ -12,7 +12,6 @@ const CreateEventModal = ({ isOpen, onClose, date }) => {
 
     const user = Cookies.get('session');
     const duedate = moment(date).format('YYYY-MM-DD');
-    console.log(duedate);
 
     // Create new event with the selected date and title
     fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/add-event.php', {
@@ -24,7 +23,6 @@ const CreateEventModal = ({ isOpen, onClose, date }) => {
         })
           .then(response => response.json())
           .then(data => {
-            console.log(data);
             if (data.success) {
               console.log('successfully added event');
               window.location.href = "/calendar";
@@ -33,9 +31,6 @@ const CreateEventModal = ({ isOpen, onClose, date }) => {
             }
           })
           .catch(error => console.error(error));
-
-    // Add the new event to the events array
-    // setEvents((prevEvents) => [...prevEvents, newEvent]);
 
     // Close the modal
     onClose();
@@ -57,7 +52,7 @@ const CreateEventModal = ({ isOpen, onClose, date }) => {
           <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </label>
         <button type="submit">Create Event</button>
-        <button onChange={(e) => onClose()}>Cancel</button>
+        <button onClick={(e) => onClose()}>Cancel</button>
       </form>
     </ReactModal>
   );

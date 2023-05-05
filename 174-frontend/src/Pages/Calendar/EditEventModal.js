@@ -1,0 +1,105 @@
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import ReactModal from "react-modal";
+
+const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
+    const [title, setTitle] = useState("");
+    const [date, setDate] = useState("");
+    const user = Cookies.get('session');
+
+    function handleDateUpdate(e) {
+        e.preventDefault();
+
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-date.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: user, title: oldtitle, duedate: date})
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    console.log('successfully updated date');
+                    window.location.href = "/calendar";
+                } else {
+                    console.log(data.message);
+                }
+            })
+            .catch(error => console.error(error));
+    }
+
+    function handleTitleUpdate(e) {
+        e.preventDefault();
+
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-title.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: user, title: oldtitle, newtitle: title})
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    console.log('successfully updated title');
+                    window.location.href = "/calendar";
+                } else {
+                    console.log(data.message);
+                }
+            })
+            .catch(error => console.error(error));
+    }
+
+    function handleDelete(e) {
+        e.preventDefault();
+
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-delete.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: user, title: oldtitle})
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    console.log('successfully removed event');
+                    window.location.href = "/calendar";
+                } else {
+                    console.log(data.message);
+                }
+            })
+            .catch(error => console.error(error));
+    }
+
+  return (
+    <ReactModal 
+        className="create-modal" 
+        overlayClassName="modal-overlay"
+        isOpen={isOpen} 
+        onRequestClose={onClose}>
+      <h2>Edit Event</h2>
+      <p>{oldtitle}</p>
+      <form >
+        <label>
+          Title:
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        </label>
+        <button onClick={handleTitleUpdate}>Update title</button>
+        <label>
+          Date (yyyy-mm-dd):
+          <input type="text" value={date} onChange={(e) => setDate(e.target.value)} />
+        </label>
+        <button onClick={handleDateUpdate}>Update date</button>
+        <button onClick={handleDelete}>Delete event</button>
+        <button onClick={(e) => onClose()}>Cancel</button>
+      </form>
+    </ReactModal>
+  );
+};
+
+export default EditEventModal;

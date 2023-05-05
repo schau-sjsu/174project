@@ -6,6 +6,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 import CreateEventModal from './CreateEventModal';
+import EditEventModal from './EditEventModal';
 import './Calendar.css'
 
 function Calendar() {
@@ -54,10 +55,6 @@ function Calendar() {
       }, []);
 
     // open modal when date is clicked
-    // const handleDateClick = (arg) => {
-    //     // open your modal here
-    //     console.log(arg.date);
-    //   }
 
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -68,6 +65,16 @@ function Calendar() {
         setShowModal(true);
     };
 
+    // open edit modal when event is clicked
+
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const handleEventClick = (clickInfo) => {
+        setSelectedEvent(clickInfo.event._def.title);
+        setShowEditModal(true);
+    };
+
     return (
         <div className='parent'>
             <div className='calendar'>
@@ -75,6 +82,8 @@ function Calendar() {
                     plugins={[ dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin ]}
                     initialView={view}
                     dateClick={handleDateClick}
+                    selectable={true}
+                    eventClick={handleEventClick}
                     headerToolbar={{
                         start: "prev,next today",
                         center: "title",
@@ -86,7 +95,8 @@ function Calendar() {
                 />
             </div>
             
-            <CreateEventModal overlayClassName="modal-overlay" isOpen={showModal} onClose={() => setShowModal(false)} date={selectedDate} />
+            <CreateEventModal isOpen={showModal} onClose={() => setShowModal(false)} date={selectedDate} />
+            <EditEventModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} oldtitle={selectedEvent} />
         </div>
     );
 }
