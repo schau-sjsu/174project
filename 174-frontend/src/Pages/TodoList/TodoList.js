@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 function TodoList() {
-    const [user, setUser] = useState(null);
 
-    useEffect(() => {
-      fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/currentuser.php')
-        .then(response => response.json())
-        .then(data => {setUser(data); console.log(data)})
-        .catch(error => console.error(error));
-    }, []);
+    const user = Cookies.get('session');
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/todo.php')
-        .then(response => response.json())
-        .then(data => setData(data))
-        .catch(error => console.error(error));
+        if (user) {
+            fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/todo.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: user })
+            })
+            .then(response => response.json())
+            .then(data => setData(data))
+            .catch(error => console.error(error));
+        }
     }, []);
 
-    function handleLogout() {
-        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/logout.php')
-            .then(response => response.text())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-        setUser(null);
-        window.location.href = "/login";
-    }
-
     if (user) {
+
         return (
             <div>
-                <button onClick={handleLogout}>Logout</button>
             <h1>Upcoming Tasks</h1>
             <div>
                 {data.map(item => (
@@ -45,7 +39,9 @@ function TodoList() {
         );
     } else {
         return (
-            <div>Not logged in</div>
+            <div>
+                <p>Insert pretty landing page</p>
+            </div>
         );
     }
 }

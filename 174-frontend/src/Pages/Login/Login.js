@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -18,6 +19,7 @@ function Login() {
       .then(data => {
         if (data.success) {
           console.log('successful login');
+          Cookies.set('session', username, { path: '/' });
           window.location.href = "/";
         } else {
           setErrorMessage(data.message);
