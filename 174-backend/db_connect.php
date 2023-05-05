@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost"; // replace with your server name
 $username = "blueducksuser"; // replace with your MySQL username
 $password = "HL95#3#ZxTZ"; // replace with your MySQL password
