@@ -29,7 +29,7 @@ function TodoList() {
             <h1>Upcoming Tasks</h1>
             <div>
                 {data.map(item => (
-                <div className='task-card'>
+                <div key={item.tid} className='task-card'>
                     <h2>{item.description}</h2>
                     <p>{item.duedate}</p>
                 </div>
