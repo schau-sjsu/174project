@@ -21,17 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Check if the username and password combination is correct
+    
     $sql = "INSERT INTO calendar (username, title, duedate) VALUES ('$username', '$title', '$duedate')";
     $result = $conn->query($sql);
 
     if ($result === TRUE) {
-        // Username is unique --> add the new user to the database
         $response = ['success' => true];
         echo json_encode($response);
         exit;
     } else {
-        // Registration failed
         $response = ['success' => false, 'message' => 'Add event unsuccessful'];
         echo json_encode($response);
         exit;

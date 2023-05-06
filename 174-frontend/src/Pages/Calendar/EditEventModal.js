@@ -76,6 +76,31 @@ const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
             .catch(error => console.error(error));
     }
 
+    function handleExport(e) {
+        e.preventDefault();
+
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-export.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: user, title: oldtitle})
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    console.log('successfully exported event');
+                    alert('Successfully exported event')
+                    window.location.href = "/calendar";
+                } else {
+                    console.log(data.message);
+                    alert('Event already in todo list');
+                }
+            })
+            .catch(error => console.error(error));
+    }
+
   return (
     <ReactModal 
         className="create-modal" 
@@ -96,6 +121,7 @@ const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
         </label>
         <button onClick={handleDateUpdate}>Update date</button>
         <button onClick={handleDelete}>Delete event</button>
+        <button onClick={handleExport}>Export to todo list</button>
         <button onClick={(e) => onClose()}>Cancel</button>
       </form>
     </ReactModal>

@@ -13,17 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $data['username'];
     $title = $data['title'];
 
-    // Check if the username and password combination is correct
+    
     $sql = "DELETE from calendar WHERE username='$username' AND title='$title'";
     $result = $conn->query($sql);
 
     if ($result === TRUE) {
-        // Username is unique --> add the new user to the database
         $response = ['success' => true];
         echo json_encode($response);
         exit;
     } else {
-        // Registration failed
         $response = ['success' => false, 'message' => 'Delete event unsuccessful'];
         echo json_encode($response);
         exit;

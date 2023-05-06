@@ -12,17 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $username = $data['username'];
     $title = $data['title'];
-    $newtitle = $data['newtitle'];
-
-    // Validate the user's input
-    if (empty($newtitle)) {
-        $response = ['success' => false, 'message' => 'Please enter a new title'];
-        echo json_encode($response);
-        exit;
-    }
 
     
-    $sql = "UPDATE calendar SET title='$newtitle' WHERE username='$username' AND title='$title'";
+    $sql = "SELECT duedate from calendar WHERE username='$username' AND title='$title'";
+    $result = $conn->query($sql);
+
+    $row = $result->fetch_assoc();
+
+    $duedate = $row['duedate'];
+
+    $sql = "INSERT into tasks (username, description, duedate) VALUES ('$username', '$title', '$duedate')";
     $result = $conn->query($sql);
 
     if ($result === TRUE) {
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($response);
         exit;
     } else {
-        $response = ['success' => false, 'message' => 'Edit event unsuccessful'];
+        $response = ['success' => false, 'message' => 'Export event unsuccessful'];
         echo json_encode($response);
         exit;
     }
