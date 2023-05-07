@@ -1,0 +1,25 @@
+.tasks {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.past-due {
+/*	flex-basis: 60%;*/
+	border-radius: 10px;
+	height: 200px;
+	background-color: #FFC0CB;
+	margin: 1%;
+	padding: 5px;
+	width: calc(16.66% - 10px);
+	width: 250px;
+}
+
+.not-due {
+	border-radius: 10px;
+	height: 200px;
+	background-color: #9AE19D;
+	margin: 1%;
+	padding: 5px;
+	width: calc(16.66% - 10px);
+	width: 250px;
+}

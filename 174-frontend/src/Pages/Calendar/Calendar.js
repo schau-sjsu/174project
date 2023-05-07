@@ -41,7 +41,7 @@ function Calendar() {
 
     useEffect(() => {
         if (user) {
-            fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/events.php', {
+            fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/events.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

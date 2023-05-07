@@ -14,7 +14,7 @@ const CreateEventModal = ({ isOpen, onClose, date }) => {
     const duedate = moment(date).format('YYYY-MM-DD');
 
     // Create new event with the selected date and title
-    fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/add-event.php', {
+    fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/add-event.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
