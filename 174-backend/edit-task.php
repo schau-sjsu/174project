@@ -26,11 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sql = "UPDATE tasks SET description='$newdescription', duedate='$newduedate' WHERE username='$username' AND description='$description' AND duedate='$duedate'";
     $result = $conn->query($sql);
-
     if ($result === TRUE) {
-        $response = ['success' => true];
-        echo json_encode($response);
-        exit;
+        $sql = "UPDATE calendar SET title='$newdescription', duedate='$newduedate' WHERE username='$username' AND title='$description' AND duedate='$duedate'";
+        $result = $conn->query($sql);
+        if ($result == TRUE) {
+            $response = ['success' => true];
+            echo json_encode($response);
+            exit;
+        } else {
+            $response = ['success' => false, 'message' => 'Edit event unsuccessful'];
+            echo json_encode($response);
+            exit;
+        }
     } else {
         $response = ['success' => false, 'message' => 'Edit task unsuccessful'];
         echo json_encode($response);

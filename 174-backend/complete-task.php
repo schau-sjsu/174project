@@ -17,11 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $sql = "DELETE from tasks WHERE username='$username' AND description='$description' AND duedate='$duedate'";
     $result = $conn->query($sql);
-
     if ($result === TRUE) {
-        $response = ['success' => true];
-        echo json_encode($response);
-        exit;
+        $sql = "DELETE from calendar WHERE username='$username' AND title='$description' AND duedate='$duedate'";
+        $result = $conn->query($sql);
+        if ($result == TRUE) {
+            $response = ['success' => true];
+            echo json_encode($response);
+            exit;
+        } else {
+            $response = ['success' => false, 'message' => 'Complete event unsuccessful'];
+            echo json_encode($response);
+            exit;
+        }
     } else {
         $response = ['success' => false, 'message' => 'Complete task unsuccessful'];
         echo json_encode($response);

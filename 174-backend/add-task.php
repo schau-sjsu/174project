@@ -26,9 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $conn->query($sql);
 
     if ($result === TRUE) {
-        $response = ['success' => true];
-        echo json_encode($response);
-        exit;
+        $sql = "INSERT INTO calendar (username, title, duedate) VALUES ('$username', '$description', '$duedate')";
+        $result = $conn->query($sql);
+        if ($result == TRUE) {
+            $response = ['success' => true];
+            echo json_encode($response);
+            exit;
+        } else {
+            $response = ['success' => false, 'message' => 'Add event unsuccessful'];
+            echo json_encode($response);
+            exit;
+        }
     } else {
         $response = ['success' => false, 'message' => 'Add task unsuccessful'];
         echo json_encode($response);
