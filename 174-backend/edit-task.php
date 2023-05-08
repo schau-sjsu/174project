@@ -1,0 +1,40 @@
+<?php
+session_start();
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json');
+
+require_once 'db_connect.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $username = $data['username'];
+    $description = $data['description'];
+    $newdescription = $data['newdescription'];
+    $duedate = $data['duedate'];
+    $newduedate = $data['newduedate'];
+
+    // Validate the user's input
+    if (empty($newdescription)) {
+        $response = ['success' => false, 'message' => 'Please enter a new description'];
+        echo json_encode($response);
+        exit;
+    }
+
+
+    $sql = "UPDATE tasks SET description='$newdescription' AND duedate='$newduedate' WHERE username='$username' AND description='$description' AND duedate='$duedate'";
+    $result = $conn->query($sql);
+
+    if ($result === TRUE) {
+        $response = ['success' => true];
+        echo json_encode($response);
+        exit;
+    } else {
+        $response = ['success' => false, 'message' => 'Edit task unsuccessful'];
+        echo json_encode($response);
+        exit;
+    }
+}
+?>

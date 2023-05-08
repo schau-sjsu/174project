@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import './todo.css';
 import AddTaskModal from './AddTaskModal';
+import EditTaskModal from './EditTaskModal';
 
 function TodoList() {
 
@@ -10,6 +11,7 @@ function TodoList() {
 
     const [data, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const completeTask = (e, description, duedate) => {
         e.preventDefault();
@@ -53,12 +55,17 @@ function TodoList() {
     }, []);
     let today = new Date();
     let renderView = (task, index) => {
+        console.log(index);
+        console.log(task);
         if (today > new Date(task.duedate)) {
             return (
                 <div key={task.tid} className="past-due">
                     <h2>PAST DUE DATE {task.description}</h2>
                     <p>{task.duedate}</p>
+                    <button onClick={() => setShowEditModal(true)}>Edit</button>
+                    <br />
                     <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
+                    <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} desc={task.description} dateDue={task.duedate} />
                 </div>
             );
         }
@@ -67,7 +74,10 @@ function TodoList() {
                 <div key={task.tid} className="not-due">
                     <h2>{task.description}</h2>
                     <p>{task.duedate}</p>
+                    <button onClick={() => setShowEditModal(true)}>Edit</button>
+                    <br />
                     <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
+                    <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} desc={task.description} dateDue={task.duedate} />
                 </div>
             );
         }
