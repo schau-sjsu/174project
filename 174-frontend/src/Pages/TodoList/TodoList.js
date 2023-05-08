@@ -12,6 +12,7 @@ function TodoList() {
     const [data, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [editedTask, setEditedTask] = useState(null);
 
     const completeTask = (e, description, duedate) => {
         e.preventDefault();
@@ -39,6 +40,16 @@ function TodoList() {
             .catch(error => console.error(error));
     };
 
+    const editModalTaskAssignment = (e, task) => {
+        setEditedTask(task);
+        setShowEditModal(true);
+    };
+
+    const closingEditedModal = (e) => {
+        setEditedTask(null);
+        setShowEditModal(false);
+    }
+
     useEffect(() => {
         if (user) {
             fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/todo.php', {
@@ -54,34 +65,33 @@ function TodoList() {
         }
     }, []);
     let today = new Date();
-    let renderView = (task, index) => {
-        console.log(index);
-        console.log(task);
-        if (today > new Date(task.duedate)) {
-            return (
-                <div key={task.tid} className="past-due">
-                    <h2>PAST DUE DATE {task.description}</h2>
-                    <p>{task.duedate}</p>
-                    <button onClick={() => setShowEditModal(true)}>Edit</button>
-                    <br />
-                    <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
-                    <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} desc={task.description} dateDue={task.duedate} />
-                </div>
-            );
-        }
-        else {
-            return (
-                <div key={task.tid} className="not-due">
-                    <h2>{task.description}</h2>
-                    <p>{task.duedate}</p>
-                    <button onClick={() => setShowEditModal(true)}>Edit</button>
-                    <br />
-                    <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
-                    <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} desc={task.description} dateDue={task.duedate} />
-                </div>
-            );
-        }
-    };
+    // let renderView = (task, index) => {
+    //     console.log(task);
+    //     if (today > new Date(task.duedate)) {
+    //         return (
+    //             <div key={task.tid} className="past-due">
+    //                 <h2>PAST DUE DATE {task.description}</h2>
+    //                 <p>{task.duedate}</p>
+    //                 <button onClick={() => setShowEditModal(true)}>Edit</button>
+    //                 <br />
+    //                 <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
+    //                 {/* <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} task={task} /> */}
+    //             </div>
+    //         );
+    //     }
+    //     else {
+    //         return (
+    //             <div key={task.tid} className="not-due">
+    //                 <h2>{task.description}</h2>
+    //                 <p>{task.duedate}</p>
+    //                 <button onClick={() => setShowEditModal(true)}>Edit</button>
+    //                 <br />
+    //                 <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
+    //                 {/* <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} task={task} /> */}
+    //             </div>
+    //         );
+    //     }
+    // };
 
     return (
         <>
@@ -90,7 +100,25 @@ function TodoList() {
                 <button onClick={() => setShowModal(true)}>Add Task</button>
             </div>
             <div class="tasks">
-                {data.map(task => renderView(task))}
+                {data.map(task => {
+                    let timelineClass = "";
+                    if (today > new Date(task.duedate)) {
+                        timelineClass = "past-due";
+                    }
+                    else {
+                        timelineClass = "not-due";
+                    }
+                    return (
+                        <div key={task.tid} className={timelineClass}>
+                            <h2>{task.description}</h2>
+                            <p>{task.duedate}</p>
+                            <button onClick={(e) => editModalTaskAssignment(e, task)}>Edit</button>
+                            <br />
+                            <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
+                            <EditTaskModal isOpen={showEditModal} onClose={(e) => closingEditedModal()} task={editedTask} />
+                        </div>
+                    );
+                })}
             </div>
             <AddTaskModal isOpen={showModal} onClose={() => setShowModal(false)} />
         </>

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    $sql = "UPDATE tasks SET description='$newdescription' AND duedate='$newduedate' WHERE username='$username' AND description='$description' AND duedate='$duedate'";
+    $sql = "UPDATE tasks SET description='$newdescription', duedate='$newduedate' WHERE username='$username' AND description='$description' AND duedate='$duedate'";
     $result = $conn->query($sql);
 
     if ($result === TRUE) {

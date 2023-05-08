@@ -4,16 +4,15 @@ import ReactModal from "react-modal";
 import moment from 'moment';
 import './edit-task-modal.css';
 
-const EditTaskModal = ({ isOpen, onClose, desc, dateDue }) => {
+const EditTaskModal = ({ isOpen, onClose, task }) => {
 
-    const [description, setDescription] = useState(desc);
-    const [dueDate, setDueDate] = useState(dateDue);
+    const [description, setDescription] = useState("");
+    const [dueDate, setDueDate] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(desc);
-        console.log(dateDue);
+        console.log("this is the task: ", task);
 
         const user = Cookies.get('session');
         console.log("Modal was edited!");
@@ -24,7 +23,7 @@ const EditTaskModal = ({ isOpen, onClose, desc, dateDue }) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username: user, description: desc, duedate: dateDue, newdescription: description, newduedate: dueDate })
+            body: JSON.stringify({ username: user, description: task.description, duedate: task.duedate, newdescription: description, newduedate: dueDate })
         })
             .then(response => response.json())
             .then(data => {
