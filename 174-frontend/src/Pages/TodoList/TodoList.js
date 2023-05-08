@@ -11,6 +11,32 @@ function TodoList() {
     const [data, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
+    const completeTask = (e, description, duedate) => {
+        e.preventDefault();
+
+        const user = Cookies.get('session');
+        console.log("A task has been completed!");
+
+        // Create new task with the selected description and due date
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/complete-task.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: user, description: description, duedate: duedate })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('successfully added event');
+                    window.location.href = "/";
+                } else {
+                    console.log(data.message);
+                }
+            })
+            .catch(error => console.error(error));
+    };
+
     useEffect(() => {
         if (user) {
             fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/todo.php', {
@@ -32,6 +58,7 @@ function TodoList() {
                 <div key={task.tid} className="past-due">
                     <h2>PAST DUE DATE {task.description}</h2>
                     <p>{task.duedate}</p>
+                    <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
                 </div>
             );
         }
@@ -40,6 +67,7 @@ function TodoList() {
                 <div key={task.tid} className="not-due">
                     <h2>{task.description}</h2>
                     <p>{task.duedate}</p>
+                    <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
                 </div>
             );
         }
