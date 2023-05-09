@@ -94,10 +94,13 @@ function TodoList() {
     // };
 
     return (
-        <>
+        <div className='todo-ctn'>
             <div id="heading">
-                <center><h1> Tasks for User: {user} </h1></center>
-                <button onClick={() => setShowModal(true)}>Add Task</button>
+                <center><h1> {user}'s tasks </h1></center>
+                <center>
+                    <button onClick={() => setShowModal(true)}>Add Task</button>
+                </center>
+                
             </div>
             <div class="tasks">
                 {data.map(task => {
@@ -121,7 +124,7 @@ function TodoList() {
                 })}
             </div>
             <AddTaskModal isOpen={showModal} onClose={() => setShowModal(false)} />
-        </>
+        </div>
     );
 }
 

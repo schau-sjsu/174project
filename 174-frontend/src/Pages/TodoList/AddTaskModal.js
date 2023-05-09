@@ -44,17 +44,23 @@ const AddTaskModal = ({ isOpen, onClose }) => {
             isOpen={isOpen}
             onRequestClose={onClose}>
             <h2>Add Task</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Description:
-                    <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-                </label>
-                <label>
-                    Due Date:
-                    <input type='date' value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
-                </label>
-                <button type="submit">Create Task</button>
-                <button onClick={(e) => onClose()}>Cancel</button>
+            <form className='add-task-form' onSubmit={handleSubmit}>
+                <div>
+                    <label>
+                        Description:&nbsp;&nbsp;&nbsp;
+                        <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Due Date:&nbsp;&nbsp;&nbsp;
+                        <input type='date' value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+                    </label>
+                </div>
+                <div>
+                    <button type="submit">Create Task</button>
+                    <button onClick={(e) => onClose()}>Cancel</button>
+                </div>
             </form>
         </ReactModal>
     );

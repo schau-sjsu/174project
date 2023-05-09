@@ -1,10 +1,10 @@
-.task-add-modal {
+.edit-modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30%;
-    height: 30%;
+    display: inline-block;
+    padding: 5rem;
     text-align: center;
     z-index: 9999;
     background-color: aliceblue;
@@ -13,7 +13,7 @@
     border: solid #2C3E50;
 }
 
-.add-task-form button {
+.edit-form button {
     margin: 1rem;
     background-color: #2c3e50;
     border: solid #2c3e50;
@@ -22,13 +22,13 @@
 	margin: 3px;
 }
 
-.add-task-form button:hover {
+.edit-form button:hover {
     background-color: white;
     border: solid #2c3e50 2px;
     color: #2c3e50;
 	border-radius: 5px;
 }
 
-.add-task-form div {
+.edit-form div {
     margin-top: 2rem;
 }
