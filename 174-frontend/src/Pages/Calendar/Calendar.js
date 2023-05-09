@@ -23,16 +23,16 @@ function Calendar() {
 
     const viewButtons = {
         month: {
-        text: "Month",
-        click: () => handleViewChange("dayGridMonth"),
+            text: "Month",
+            click: () => handleViewChange("dayGridMonth"),
         },
         week: {
-        text: "Week",
-        click: () => handleViewChange("timeGridWeek"),
+            text: "Week",
+            click: () => handleViewChange("timeGridWeek"),
         },
         list: {
-        text: "List",
-        click: () => handleViewChange("listMonth"),
+            text: "List",
+            click: () => handleViewChange("listMonth"),
         },
     };
 
@@ -41,7 +41,7 @@ function Calendar() {
 
     useEffect(() => {
         if (user) {
-            fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/events.php', {
+            fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/events.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ function Calendar() {
         };
       }, []);
 
-    // open modal when date is clicked
+    // open add modal when date is clicked
 
     const [selectedDate, setSelectedDate] = useState(null);
     const [showModal, setShowModal] = useState(false);

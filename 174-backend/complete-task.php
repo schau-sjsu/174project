@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode($response);
             exit;
         } else {
-            $response = ['success' => false, 'message' => 'Complete event unsuccessful'];
+            $response = ['success' => false, 'message' => 'Complete task unsuccessful'];
             echo json_encode($response);
             exit;
         }

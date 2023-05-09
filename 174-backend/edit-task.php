@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode($response);
             exit;
         } else {
-            $response = ['success' => false, 'message' => 'Edit event unsuccessful'];
+            $response = ['success' => false, 'message' => 'Edit task unsuccessful'];
             echo json_encode($response);
             exit;
         }

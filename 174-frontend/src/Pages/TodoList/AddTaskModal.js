@@ -25,7 +25,7 @@ const AddTaskModal = ({ isOpen, onClose }) => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log('successfully added event');
+                    console.log('successfully added task');
                     window.location.href = "/";
                 } else {
                     console.log(data.message);

@@ -17,7 +17,7 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
         const user = Cookies.get('session');
         console.log("Modal was edited!");
 
-        // Create new task with the selected description and due date
+        // Edit task with the selected description and due date
         fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-task.php', {
             method: 'POST',
             headers: {
@@ -28,7 +28,7 @@ const EditTaskModal = ({ isOpen, onClose, task }) => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log('successfully added event');
+                    console.log('successfully updated task');
                     window.location.href = "/";
                 } else {
                     console.log(data.message);

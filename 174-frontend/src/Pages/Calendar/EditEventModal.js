@@ -12,7 +12,7 @@ const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
     function handleDateUpdate(e) {
         e.preventDefault();
 
-        fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/edit-event-date.php', {
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-date.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
     function handleTitleUpdate(e) {
         e.preventDefault();
 
-        fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/edit-event-title.php', {
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-title.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
     function handleDelete(e) {
         e.preventDefault();
 
-        fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/edit-event-delete.php', {
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-delete.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
     function handleExport(e) {
         e.preventDefault();
 
-        fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/edit-event-export.php', {
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/edit-event-export.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

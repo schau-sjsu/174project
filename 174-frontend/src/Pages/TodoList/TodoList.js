@@ -20,7 +20,7 @@ function TodoList() {
         const user = Cookies.get('session');
         console.log("A task has been completed!");
 
-        // Create new task with the selected description and due date
+        // Complete the task with the selected description and due date
         fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/complete-task.php', {
             method: 'POST',
             headers: {
@@ -52,7 +52,7 @@ function TodoList() {
 
     useEffect(() => {
         if (user) {
-            fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/todo.php', {
+            fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/todo.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -64,34 +64,8 @@ function TodoList() {
                 .catch(error => console.error(error));
         }
     }, []);
+    
     let today = new Date();
-    // let renderView = (task, index) => {
-    //     console.log(task);
-    //     if (today > new Date(task.duedate)) {
-    //         return (
-    //             <div key={task.tid} className="past-due">
-    //                 <h2>PAST DUE DATE {task.description}</h2>
-    //                 <p>{task.duedate}</p>
-    //                 <button onClick={() => setShowEditModal(true)}>Edit</button>
-    //                 <br />
-    //                 <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
-    //                 {/* <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} task={task} /> */}
-    //             </div>
-    //         );
-    //     }
-    //     else {
-    //         return (
-    //             <div key={task.tid} className="not-due">
-    //                 <h2>{task.description}</h2>
-    //                 <p>{task.duedate}</p>
-    //                 <button onClick={() => setShowEditModal(true)}>Edit</button>
-    //                 <br />
-    //                 <button onClick={(e) => completeTask(e, task.description, task.duedate)}>Complete</button>
-    //                 {/* <EditTaskModal isOpen={showEditModal} onClose={() => setShowEditModal(false)} task={task} /> */}
-    //             </div>
-    //         );
-    //     }
-    // };
 
     return (
         <div className='todo-ctn'>

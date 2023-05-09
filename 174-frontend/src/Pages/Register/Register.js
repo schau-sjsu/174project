@@ -9,7 +9,7 @@ function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch('http://cos-cs106.science.sjsu.edu/~014155765/code/register.php', {
+        fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/register.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

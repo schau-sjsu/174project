@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Check if the username and password combination is correct
+    // Check if the username and password combination already exists
     $sql = "INSERT INTO users VALUES ('$username', '$password')";
     $result = $conn->query($sql);
 
