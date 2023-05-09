@@ -121,8 +121,8 @@ const EditEventModal = ({ isOpen, onClose, oldtitle }) => {
         </div>
         <div className='date-update'>
             <label>
-            Date (yyyy-mm-dd):&nbsp;&nbsp;&nbsp;
-            <input type="text" value={date} onChange={(e) => setDate(e.target.value)} />
+            Date:&nbsp;&nbsp;&nbsp;
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </label>
             <button onClick={handleDateUpdate}>Update date</button>
         </div>

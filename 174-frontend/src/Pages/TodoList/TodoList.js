@@ -96,11 +96,28 @@ function TodoList() {
     return (
         <div className='todo-ctn'>
             <div id="heading">
-                <center><h1> {user}'s tasks </h1></center>
-                <center>
-                    <button onClick={() => setShowModal(true)}>Add Task</button>
-                </center>
-                
+                {user && (
+                    <center><h1> {user}'s tasks </h1></center>
+                )}
+                {user && (
+                    <center>
+                        <button onClick={() => setShowModal(true)}>Add Task</button>
+                    </center>
+                )}
+                {!user && (
+                    <center id='not-logged-in'>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <h1>Welcome to Organizer</h1>
+                        
+                        <h2> Login to view your tasks. </h2>
+                        <br />
+                        <button id='login-btn' onClick={() => {window.location.href = "/login";}}>Login</button>
+                    </center>
+                )}
             </div>
             <div class="tasks">
                 {data.map(task => {
