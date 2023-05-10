@@ -5,6 +5,8 @@
     align-items: center;
     border-radius: 8px;
     padding: 3rem;
+    width: 40%;
+    transform: translate(5%, 30%);
 }
 
 .form h2 {
@@ -33,16 +35,12 @@
 }
 
 #ctn {
-    /* display: inline-block; */
     padding: 1rem;
-    /* position: relative; */
-    /* bottom: 30%;
-    left: 3rem; */
-    position: relative;
-    width: 30%;
-    left: calc(0.5*vw - 0.15*vw);
-    margin: auto;
-    /* background-image: url(../../bg.jpg);
-    background-size: 600px 300px;
-    background-repeat: no-repeat; */
+    background-image: url(../../bg.jpg);
+    background-size: cover;
+    height: 50%;
+    width: 40%;
+    margin: 0 auto;
+    transform: translate(60%, 20%);
+    border-radius: 8px;
 }
