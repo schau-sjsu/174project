@@ -16,7 +16,7 @@ const Navigation = () => {
     return (
         <div id='nav'>
             <div>
-                <a href="/" class='button'>Organizer</a>
+                <a href="/" class='button'>A+ Planner</a>
             </div>
 
             {user && (

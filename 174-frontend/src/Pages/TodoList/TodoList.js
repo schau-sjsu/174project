@@ -85,7 +85,7 @@ function TodoList() {
                         <br />
                         <br />
                         <br />
-                        <h1>Welcome to Organizer</h1>
+                        <h1>Stay organized with A+ Planner</h1>
                         
                         <h2> Login to view your tasks. </h2>
                         <br />
