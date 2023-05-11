@@ -10,6 +10,9 @@ const App = () => {
   return (
     <Router>
       <div className='App'>
+        <header>
+          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        </header>
         <Navigation />
         <Routes>
           <Route path="/" element={<TodoList />} exact />
