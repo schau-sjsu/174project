@@ -9,7 +9,7 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch('https://a-plus-planner.netlify.app/api/login.php', {
+    fetch('http://cos-cs106.science.sjsu.edu/~013879866/code/login.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
